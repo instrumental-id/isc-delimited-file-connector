@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2021 SailPoint Technologies, Inc.  All rights reserved. -->
+<Form xmlns="http://www.sailpoint.com/xsd/sailpoint_form_2_0.xsd" name='DelimitedFileDirectConnector' connectorName='custom_delimitedFileDirect' type='SourceConfig' directConnect='true' status='released' shortDesc="Delimited File Direct">
+    <BaseConfig>
+        <Field name="fileUpload" maxFiles="15" supportedExtensions="jar"
+               type="fileupload" maxSize="300" validateJSON="false" />
+    </BaseConfig>
+    <Menu name="ConnectionSettings" label="menuLabel_ConnectionSettings">
+        <Section name="authtype" label="menuLabel_ConnectionSettings" sectionInfo="Enter the information required to find your file and authenticate to your server">
+            <Field name="path" displayName="File Path" helpKey="The path to your file on the remote host" type="text" required="true" />
+            <Field name="transferType" displayName="fieldLabel_TransferType" type="radio" defaultValue="SFTP">
+                <AllowedValues>
+                    <Option label="SFTP" value="sftp" />
+                    <Option label="FTP" value="ftp" />
+                    <Option label="FTPS" value="ftps" />
+                    <Option label="SMB/Windows Share" value="smb" />
+                    <Option label="HTTP/HTTPS" value="http" />
+                    <Option label="Google Cloud Storage" value="gcs" />
+                    <Option label="Azure Blob Storage" value="azure" />
+                    <Option label="Amazon S3" value="s3" />
+                </AllowedValues>
+            </Field>
+
+            <!-- Common fields -->
+            <Field name="authtype" displayName="fieldLabel_AuthenticationType" type="radio"
+                defaultValue="Password" parentKey="transferType"
+                parentValue="sftp">
+                <AllowedValues>
+                    <Option label="Password" value="Password" />
+                    <Option label="Certificate" value="Certificate" />
+                </AllowedValues>
+            </Field>
+
+            <Field name="authtype" displayName="fieldLabel_AuthenticationType" type="radio"
+                defaultValue="Password" parentKey="transferType"
+                parentValue="ftp">
+                <AllowedValues>
+                    <Option label="Password" value="Password" />
+                    <Option label="Certificate" value="Certificate" />
+                </AllowedValues>
+            </Field>
+
+            <Field name="authtype" displayName="fieldLabel_AuthenticationType" type="radio"
+                defaultValue="Password" parentKey="transferType"
+                parentValue="ftps">
+                <AllowedValues>
+                    <Option label="Password" value="Password" />
+                    <Option label="Certificate" value="Certificate" />
+                </AllowedValues>
+            </Field>
+
+            <Field name="authtype" displayName="fieldLabel_AuthenticationType" type="radio"
+                defaultValue="Password" parentKey="transferType"
+                parentValue="smb">
+                <AllowedValues>
+                    <Option label="Password" value="Password" />
+                    <Option label="Certificate" value="Certificate" />
+                </AllowedValues>
+            </Field>
+            <Field name="authtype" displayName="fieldLabel_AuthenticationType" type="radio"
+                defaultValue="Password" parentKey="transferType"
+                parentValue="webdav">
+                <AllowedValues>
+                    <Option label="Password" value="Password" />
+                    <Option label="Certificate" value="Certificate" />
+                </AllowedValues>
+            </Field>
+            <Field name="authtype" displayName="fieldLabel_AuthenticationType" type="radio"
+                defaultValue="Password" parentKey="transferType"
+                parentValue="http">
+                <AllowedValues>
+                    <Option label="Password" value="Password" />
+                    <Option label="Certificate" value="Certificate" />
+                </AllowedValues>
+            </Field>
+
+            <!-- Hostname -->
+            <Field name="hostname" displayName="Hostname" type="text" required="true"
+                parentKey="transferType" parentValue="sftp" />
+            <Field name="hostname" displayName="Hostname" type="text" required="true"
+                parentKey="transferType" parentValue="ftp" />
+            <Field name="hostname" displayName="Hostname" type="text" required="true"
+                parentKey="transferType" parentValue="ftps" />
+            <Field name="hostname" displayName="Hostname" type="text" required="true"
+                parentKey="transferType" parentValue="smb" />
+            <Field name="hostname" displayName="Hostname" type="text" required="true"
+                parentKey="transferType" parentValue="webdav" />
+            <Field name="hostname" displayName="Hostname" type="text" required="true"
+                parentKey="transferType" parentValue="nfs" />
+
+            <!-- Port -->
+            <Field name="port" displayName="Port" type="text" defaultValue="22"
+                parentKey="transferType" parentValue="sftp" />
+            <Field name="port" displayName="Port" type="text" defaultValue="22"
+                parentKey="transferType" parentValue="ftp" />
+            <Field name="port" displayName="Port" type="text" defaultValue="22"
+                parentKey="transferType" parentValue="ftps" />
+            <Field name="port" displayName="Port" type="text" defaultValue="22"
+                parentKey="transferType" parentValue="nfs" />
+
+            <!-- SFTP/FTPS specific -->
+            <Field name="strictHostKeyChecking" displayName="fieldLabel_StrictHostKeyChecking"
+                type="toggle" defaultValue="false" parentKey="transferType" parentValue="sftp" />
+            
+            <Field name="strictHostKeyChecking" displayName="fieldLabel_StrictHostKeyChecking"
+                type="toggle" defaultValue="false" parentKey="transferType" parentValue="ftps" />
+
+            <!-- Common authentication fields -->
+            <Field name="username" displayName="Username" type="text" required="true" 
+                parentKey="transferType" parentValue="sftp" />
+            <Field name="username" displayName="Username" type="text" required="true"
+                parentKey="transferType" parentValue="ftp" />
+            <Field name="username" displayName="Username" type="text" required="true"
+                parentKey="transferType" parentValue="ftps" />
+            <Field name="username" displayName="Username" type="text" required="true"
+                parentKey="transferType" parentValue="smb" />
+            <Field name="username" displayName="Username" type="text" required="true"
+                parentKey="transferType" parentValue="webdav" />
+            <Field name="username" displayName="Username" type="text" required="true"
+                parentKey="transferType" parentValue="http" />
+            <Field name="username" displayName="Username" type="text" required="true"
+                parentKey="transferType" parentValue="nfs" />
+
+            <Field name="password" displayName="Password" type="secret" parentKey="authtype" parentValue="Password" />
+            <Field name="privateKey" displayName="Private Key" type="secrettextarea" parentKey="authtype" parentValue="Certificate" />
+            <Field name="privateKeyPassphrase" displayName="Private Key Passphrase" type="secret" parentKey="authtype" parentValue="Certificate" />
+
+            <!-- SMB specific fields -->
+            <Field name="domain" displayName="Domain" type="text" parentKey="transferType" parentValue="smb" helpKey="Windows domain name" />
+            <Field name="workgroup" displayName="Workgroup" type="text" parentKey="transferType" parentValue="smb" defaultValue="WORKGROUP" helpKey="Windows workgroup name" />
+            <Field name="share" displayName="Share Name" type="text" parentKey="transferType" parentValue="smb" required="true" helpKey="SMB share name" />
+
+            <!-- HTTP/HTTPS specific -->
+            <Field name="url" displayName="URL" type="text" required="true" parentKey="transferType" parentValue="http" helpKey="The full URL to the file" />
+            <Field name="bearerToken" displayName="Bearer Token" type="secret" parentKey="transferType" parentValue="http" helpKey="Optional bearer token for authentication" />
+            <Field name="httpHeaders" displayName="Additional Headers" type="textarea" parentKey="transferType" parentValue="http" helpKey="Additional HTTP headers in key:value format, one per line" />
+
+            <!-- Google Cloud Storage specific -->
+            <Field name="gcpProjectId" displayName="GCP Project ID" type="text" required="true" parentKey="transferType" parentValue="gcs" helpKey="Google Cloud Project ID" />
+            <Field name="gcsBucket" displayName="Bucket Name" type="text" required="true" parentKey="transferType" parentValue="gcs" helpKey="Google Cloud Storage bucket name" />
+            <Field name="gcpCredentialsJson" displayName="Service Account JSON" type="secrettextarea" required="true" parentKey="transferType" parentValue="gcs" helpKey="Service account credentials JSON" />
+
+            <!-- Azure Blob Storage specific -->
+            <Field name="azureConnectionString" displayName="Connection String" type="secret" required="true" parentKey="transferType" parentValue="azure" helpKey="Azure Storage Account connection string" />
+            <Field name="azureContainerName" displayName="Container Name" type="text" required="true" parentKey="transferType" parentValue="azure" helpKey="Azure Blob Storage container name" />
+
+            <!-- Amazon S3 specific -->
+            <Field name="bucket" displayName="Bucket Name" type="text" required="true" parentKey="transferType" parentValue="s3" helpKey="S3 bucket name" />
+            <Field name="region" displayName="AWS Region" type="text" defaultValue="us-east-1" parentKey="transferType" parentValue="s3" helpKey="AWS region for the S3 bucket" />
+            <Field name="awsAccessKeyId" displayName="Access Key ID" type="text" parentKey="transferType" parentValue="s3" helpKey="AWS access key ID" />
+            <Field name="awsSecretKey" displayName="Secret Key" type="secret" parentKey="transferType" parentValue="s3" helpKey="AWS secret access key" />
+        </Section>
+    </Menu>
+    <Menu name="AggregationSettings" label="menuLabel_AggregationSettings">
+        <Section name="AdditionalSettings" label="sectionLabel_FilterSettings" sectionInfo="Aggregation and file parsing settings can be defined here to customize how your file is interpreted" >
+            <Field name="delimiter" displayName="Delimiter" type="text" defaultValue="," />
+            <Field name="header" displayName="File has header?" type="toggle" defaultValue="true" />
+            <Field name="columns" displayName="Column list" type="textarea" parentKey="header" parentValue="false"/>
+        </Section>
+    </Menu>
+</Form>

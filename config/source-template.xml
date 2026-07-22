@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Application connector="sailpoint.connector.OpenConnectorAdapter" name="custom_delimitedFileDirect" type="custom_delimitedFileDirect" featuresString="DISCOVER_SCHEMA, NO_RANDOM_ACCESS" icon="databaseIcon">
+    <Attributes>
+        <Map>
+            <entry key="connectorClass" value="com.instrumentalid.isc.connectors.DelimitedFileDirectConnector"/>
+            <entry key="supportsDeltaAgg" value="false"/>
+            <entry key="encrypted" value="password,privateKey,privateKeyPassphrase,awsSecretKey,webdavToken,bearerToken,azureConnectionString,gcpCredentialsJson"/>
+            <entry key="transferType" value="sftp"/>
+            <entry key="authtype" value="Password" />
+            <entry key="delimiter" value="," />
+            <entry key="header">
+                <value>
+                    <Boolean>true</Boolean>
+                </value>
+            </entry>
+            <entry key="path" value=""/>
+            <entry key="hostname" value=""/>
+            <entry key="port" value="22"/>
+            <entry key="username" value=""/>
+            <entry key="password" value=""/>
+            
+            <!-- SFTP/FTPS specific configurations -->
+            <entry key="strictHostKeyChecking" value="false"/>
+            <entry key="privateKey" value=""/>
+            <entry key="privateKeyPassphrase" value=""/>
+            
+            <!-- SMB specific configurations -->
+            <entry key="workgroup" value="WORKGROUP"/>
+            <entry key="domain" value=""/>
+            <entry key="share" value=""/>
+            
+            <!-- HTTP/HTTPS specific configurations -->
+            <entry key="url" value=""/>
+            <entry key="bearerToken" value=""/>
+            <entry key="httpHeaders" value=""/>
+            
+            <!-- Google Cloud Storage specific configurations -->
+            <entry key="gcpProjectId" value=""/>
+            <entry key="gcsBucket" value=""/>
+            <entry key="gcpCredentialsJson" value=""/>
+            
+            <!-- Azure Blob Storage specific configurations -->
+            <entry key="azureConnectionString" value=""/>
+            <entry key="azureContainerName" value=""/>
+            
+            <!-- S3 specific configurations -->
+            <entry key="bucket" value=""/>
+            <entry key="region" value="us-east-1"/>
+            <entry key="awsAccessKeyId" value=""/>
+            <entry key="awsSecretKey" value=""/>
+        </Map>
+    </Attributes>
+    <Schemas>
+        <Schema identityAttribute="" displayAttribute="" nativeObjectType="account" objectType="account"/>
+    </Schemas>
+</Application>

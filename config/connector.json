@@ -1,0 +1,7 @@
+{
+    "name": "DelimitedFileDirectConnector",
+    "type": "custom_delimitedFileDirect",
+    "className": "sailpoint.connector.OpenConnectorAdapter",
+    "directConnect": "true",
+    "status": "released"
+}
