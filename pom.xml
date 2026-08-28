@@ -77,6 +77,33 @@
     </plugins>
   </build>
 
+  <dependencyManagement>
+    <dependencies>
+      <!-- Converge Netty onto a single 4.1.x. The AWS and Azure SDKs pull different
+           4.1 patch levels (netty-nio-client vs reactor-netty), and Netty modules are
+           only supported at a matching version. Stay on the 4.1 line: both SDKs ship
+           4.1.x transports, so forcing 4.2.x here would break them. -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>4.1.137.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Converge Jackson. google-cloud-storage brings jackson-core/annotations at
+           2.18.x, which is older than the jackson-databind we depend on directly;
+           databind requires a jackson-core of at least its own version. -->
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.21.6</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>de.siegmar</groupId>
@@ -154,7 +181,7 @@
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>s3</artifactId>
-      <version>2.40.16</version>
+      <version>2.54.6</version>
     </dependency>
 
     <!-- WebDAV Support -->
@@ -168,7 +195,7 @@
     <dependency>
       <groupId>org.apache.httpcomponents.client5</groupId>
       <artifactId>httpclient5</artifactId>
-      <version>5.2.1</version>
+      <version>5.6.3</version>
     </dependency>
 
     <!-- NFS Support -->
@@ -182,21 +209,21 @@
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-storage</artifactId>
-      <version>2.61.0</version>
+      <version>2.72.0</version>
     </dependency>
 
     <!-- Azure Blob Storage -->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-storage-blob</artifactId>
-      <version>12.32.0</version>
+      <version>12.35.1</version>
     </dependency>
 
     <!-- Jackson for JSON deserialization -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.20.1</version>
+      <version>2.21.6</version>
     </dependency>
 
   </dependencies>
